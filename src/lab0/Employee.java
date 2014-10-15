@@ -24,6 +24,7 @@ public class Employee {
     public static final int MAX_VACATION_DAYS = 28;
     public static final int MIN_SSN_LENGTH = 9;
     public static final int MAX_SSN_LENGTH = 11;
+    public static final int MIN_LENGTH = 1;
     public static final String SSN_ERROR_MESSAGGE = "Please re-enter your 9 digit Social Security Number.";
     private String firstName;
     private String lastName;
@@ -43,16 +44,21 @@ public class Employee {
         setFirstName(firstName);
         setLastName(lastName);
         setSsn(ssn);
-        this.hireDate = hireDate;
-        this.daysVacation = daysVacation;
+        setHireDate(hireDate);
+        setDaysVacation(daysVacation);
     }
 
     public int getDaysVacation() {
         return daysVacation;
     }
 
-    public void setDaysVacation(int daysVacation) {
-        this.daysVacation = daysVacation;
+    public final void setDaysVacation(int daysVacation) {
+
+        if (daysVacation > MAX_VACATION_DAYS) {
+            throw new IllegalArgumentException();
+        } else {
+            this.daysVacation = daysVacation;
+        }
     }
 
     public String getFirstName() {
@@ -60,35 +66,42 @@ public class Employee {
     }
 
     public final void setFirstName(String firstName) {
-
-        this.firstName = firstName;
+        if (firstName == null || firstName.length() < MIN_LENGTH) {
+            throw new IllegalArgumentException();
+        } else {
+            this.firstName = firstName;
+        }
     }
 
     public Date getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) {
-
-        this.hireDate = hireDate;
+    public final void setHireDate(Date hireDate) {
+//        if (hireDate == null) {
+//            throw new IllegalArgumentException();
+//        } else {
+            this.hireDate = hireDate;
+//        }
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-
-        this.lastName = lastName;
+    public final void setLastName(String lastName) {
+        if (lastName == null || lastName.length() < MIN_LENGTH) {
+            throw new IllegalArgumentException();
+        } else {
+            this.lastName = lastName;
+        }
     }
 
     public final String getSsn() {
         return ssn;
     }
 
-    // 333-33-3333
-    // 333333333
-    public void setSsn(String ssn) {
+    public final void setSsn(String ssn) {
         int j = 0;
         StringBuilder ssnWithoutDashes = new StringBuilder();
 

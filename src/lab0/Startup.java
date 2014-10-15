@@ -9,7 +9,7 @@ import java.util.Date;
 public class Startup {
     private String lastName;
     private String firstName;
-    private Date hireDate;
+    private static Date hireDate;
     private int vacationDays;
     private String ssn;
     private boolean b;
@@ -30,5 +30,6 @@ public class Startup {
                 emp.getFirstName().toUpperCase() 
                 + " " + emp.getLastName().toUpperCase();
         
+        System.out.println(fullNameInCaps + "  " + hireDate);
     }
 }
