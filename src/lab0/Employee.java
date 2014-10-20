@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @version 1.00
  */
 public class Employee {
-
+    public static final int MIN_VACATION_DAYS =0;
     public static final int MAX_VACATION_DAYS = 28;
     public static final int MIN_SSN_LENGTH = 9;
     public static final int MAX_SSN_LENGTH = 11;
@@ -54,7 +54,7 @@ public class Employee {
 
     public final void setDaysVacation(int daysVacation) {
 
-        if (daysVacation > MAX_VACATION_DAYS) {
+        if (daysVacation > MAX_VACATION_DAYS || daysVacation < MIN_VACATION_DAYS) {
             throw new IllegalArgumentException();
         } else {
             this.daysVacation = daysVacation;
@@ -78,11 +78,11 @@ public class Employee {
     }
 
     public final void setHireDate(Date hireDate) {
-//        if (hireDate == null) {
-//            throw new IllegalArgumentException();
-//        } else {
+        if (hireDate == null) {
+            throw new IllegalArgumentException();
+        } else {
             this.hireDate = hireDate;
-//        }
+        }
     }
 
     public String getLastName() {

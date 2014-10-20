@@ -10,6 +10,11 @@ package lab3;
 public class NameService {
     private static final int FIRST_NAME_IDX = 0;
     private static final int LAST_NAME_IDX = 1;
+    public static final int MAX_LENGTH = 2;
+    public static final int ZERO = 0;
+    public static final String SPLIT_VALUE = " ";
+    public static final String ERROR_NAME_MESSAGGE = "Please try again. Enter first and last names with a space between.";
+    public static final String ERROR_BLANK_MESSAGGE = "Please try again. Your full name cannot be blank.";
     
     /**
      * Finds and returns the last name from within a full name. Caution: 
@@ -17,10 +22,22 @@ public class NameService {
      * 
      * @param fullName - a name containing a first name and a last name
      * @return the last name
+     * @throws lab3.MyCustomException
      */
-    public String extractLastName(String fullName) {
-        String[] nameParts = fullName.split(" ");
-        return nameParts[LAST_NAME_IDX];
+    public String extractLastName(String fullName) throws MyCustomException {
+
+        String lastName = "";
+        if (fullName.length() > ZERO) {
+            String[] nameParts = fullName.split(SPLIT_VALUE);
+            if (nameParts.length == MAX_LENGTH) {
+                lastName = nameParts[nameParts.length - LAST_NAME_IDX];
+            } else {
+                throw new MyCustomException(ERROR_NAME_MESSAGGE);
+            }
+        } else {
+            throw new MyCustomException(ERROR_BLANK_MESSAGGE);
+        }
+        return lastName;
     }
     
     /**
@@ -29,10 +46,23 @@ public class NameService {
      * 
      * @param fullName - a name containing a first name and a last name
      * @return the first name
+     * @throws lab3.MyCustomException
      */
-    public String extractFirstName(String fullName) {
-        String[] nameParts = fullName.split(" ");
-        return nameParts[FIRST_NAME_IDX];
+    public String extractFirstName(String fullName) throws MyCustomException {
+
+        String firstName = "";
+        if (fullName.length() > ZERO) {
+            String[] nameParts = fullName.split(SPLIT_VALUE);
+            if (nameParts.length == MAX_LENGTH) {
+                firstName = nameParts[FIRST_NAME_IDX];
+            } else {
+                throw new MyCustomException(ERROR_NAME_MESSAGGE);
+            }
+        } else {
+            throw new MyCustomException(ERROR_BLANK_MESSAGGE);
+        }
+        return firstName;
+
     }
 
     /**
